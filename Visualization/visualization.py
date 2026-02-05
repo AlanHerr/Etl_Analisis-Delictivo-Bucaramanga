@@ -1,19 +1,19 @@
-import pandas as pd  # Librería principal para manipulación y análisis de datos
-import matplotlib.pyplot as plt  # Librería para visualización de gráficos
-import seaborn as sns  # Librería para visualización estadística avanzada
-import os  # Librería para manejo de rutas y archivos
+import pandas as pd  # Libreria principal para manipulacion y analisis de datos
+import matplotlib.pyplot as plt  # Libreria para visualizacion de graficos
+import seaborn as sns  # Libreria para visualizacion estadistica avanzada
+import os  # Libreria para manejo de rutas y archivos
 
 class DataVisualizer:
     """
-    Clase encargada de la generación y guardado de gráficas de boxplot para el análisis exploratorio de datos.
-    Guarda las imágenes en la carpeta especificada.
+    Clase encargada de la generacion y guardado de graficas de boxplot para el analisis exploratorio.
+    Guarda las imagenes en la carpeta especificada.
     """
     def __init__(self, df, output_dir="Visualization/images"):
         """
         Inicializa el visualizador con el DataFrame y la carpeta de salida.
         Args:
             df (pd.DataFrame): DataFrame con los datos a visualizar.
-            output_dir (str): Carpeta donde se guardarán las imágenes.
+            output_dir (str): Carpeta donde se guardaran las imagenes.
         """
         self.df = df
         self.output_dir = output_dir
@@ -21,7 +21,7 @@ class DataVisualizer:
 
     def boxplot_all(self):
         """
-        Genera y guarda un diagrama de caja (boxplot) de todas las columnas numéricas del DataFrame.
+        Genera y guarda un diagrama de caja (boxplot) de todas las columnas numericas del DataFrame.
         El archivo se guarda como 'boxplot_all.png'.
         """
         plt.figure(figsize=(10, 4))
@@ -32,7 +32,7 @@ class DataVisualizer:
 
     def boxplot_column(self, column):
         """
-        Genera y guarda un diagrama de caja para una columna específica, marcando los límites de outliers.
+        Genera y guarda un diagrama de caja para una columna especifica, marcando limites de outliers.
         El archivo se guarda como 'boxplot_<columna>.png'.
         Args:
             column (str): Nombre de la columna a graficar.
@@ -41,7 +41,6 @@ class DataVisualizer:
             return
         fig, ax = plt.subplots(figsize=(15, 4))
         sns.boxplot(x=self.df[column], ax=ax)
-        # Calcular límites de outliers
         q1 = self.df[column].quantile(0.25)
         q3 = self.df[column].quantile(0.75)
         iqr = q3 - q1
@@ -56,10 +55,10 @@ class DataVisualizer:
 
     def save_all(self):
         """
-        Genera y guarda todas las gráficas necesarias para el análisis exploratorio:
-        - Boxplot general de todas las columnas numéricas
-        - Boxplot para 'MatchID' y 'RoundID' con límites de outliers
+        Genera y guarda todas las graficas necesarias para el analisis exploratorio:
+        - Boxplot general de todas las columnas numericas
+        - Boxplot para 'EDAD_AFECTADO' con limites de outliers
         """
         self.boxplot_all()
-        for col in ["MatchID", "RoundID"]:
+        for col in ["EDAD_AFECTADO"]:
             self.boxplot_column(col)
